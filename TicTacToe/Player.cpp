@@ -10,7 +10,7 @@ string Player::getPiece() const
 {
 	return piece;
 }
-bool Player::playerHuman()
+bool Player::playerHuman() const
 {
 	return isHuman;
 }
