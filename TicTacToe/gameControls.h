@@ -13,7 +13,7 @@ public:
 	gameControls();
 	void setBoard();
 	void addPlayers(int numOfPlayers);
-	int chooseSpot(int spot);
+	void chooseSpot(int spot);
 	int nextTurn();
 	void takeTurn();
 	bool isWinner();

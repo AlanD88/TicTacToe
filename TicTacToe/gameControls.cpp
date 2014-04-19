@@ -8,11 +8,12 @@ gameControls::gameControls()
 }
 void gameControls::setBoard()
 {
-	cout << board[0] << "|" << board[1] << "|" << board[2];
-	cout << "\n--|--|--\n";
-	cout << board[3] << "|" << board[4] << "|" << board[5];
-	cout << "\n--|--|--\n";
-	cout << board[6] << "|" << board[7] << "|" << board[8];
+	cout << board[0] << " | " << board[1] << " | " << board[2];
+	cout << "\n---|---|---\n";
+	cout << board[3] << " | " << board[4] << " | " << board[5];
+	cout << "\n---|---|---\n";
+	cout << board[6] << " | " << board[7] << " | " << board[8];
+	cout << endl;
 	cout << endl;
 
 }
@@ -26,19 +27,19 @@ void gameControls::addPlayers(int numOfPlayers)
 	{
 	case 0: //Only AI
 		player[0].setPlayer("X", false);
-		player[1].setPlayer("0", false);
+		player[1].setPlayer("O", false);
 
 		break;
 
 	case 1:
 		player[0].setPlayer("X", true);
-		player[1].setPlayer("0", false);
+		player[1].setPlayer("O", false);
 
 		break;
 
 	case 2:
 		player[0].setPlayer("X", true);
-		player[1].setPlayer("0", true);
+		player[1].setPlayer("O", true);
 
 		break;
 
@@ -50,7 +51,7 @@ void gameControls::addPlayers(int numOfPlayers)
 	}
 }
 
-int gameControls::chooseSpot(int spot)
+void gameControls::chooseSpot(int spot)
 {
 	switch (spot)
 	{
@@ -58,10 +59,11 @@ int gameControls::chooseSpot(int spot)
 		if (board[0] == "0")
 		{
 			board[0] = player[playerTurn].getPiece();
+
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -72,7 +74,7 @@ int gameControls::chooseSpot(int spot)
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -83,7 +85,7 @@ int gameControls::chooseSpot(int spot)
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -94,7 +96,7 @@ int gameControls::chooseSpot(int spot)
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -105,7 +107,7 @@ int gameControls::chooseSpot(int spot)
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -116,7 +118,7 @@ int gameControls::chooseSpot(int spot)
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -127,7 +129,7 @@ int gameControls::chooseSpot(int spot)
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -138,7 +140,7 @@ int gameControls::chooseSpot(int spot)
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -149,7 +151,7 @@ int gameControls::chooseSpot(int spot)
 		}
 		else
 		{
-			cerr << "Cannot move there.\n";
+			cerr << "Cannot move there.\n\n";
 		}
 		break;
 
@@ -210,31 +212,34 @@ void gameControls::takeTurn()
 {
 	isWinner();
 	
+	
 	while (!isWinner())
 	{
 		nextTurn();
+		setBoard();
 		int choice;
 
 		if (player[playerTurn].playerHuman())
 		{
-			cout << player[playerTurn].getPiece() << "turn\n";
+			cout << player[playerTurn].getPiece() << " turn\n\n";
 			cin >> choice;
 
 			chooseSpot(choice);
+
+			cout << endl;
 			
 		}
 		else //AI's turn
 		{
-			cout << player[playerTurn].getPiece() << "turn\n";
+			cout << player[playerTurn].getPiece() << " turn\n\n";
 			
-			choice = rand() % 10;
-			while (board[choice] == "X" || board[choice] == "O")
-			{
-				choice = rand() % 10;
-			}
-			chooseSpot(choice);
+			
 
 		}
 
+	}
+	if (isWinner())
+	{
+		cout << player[playerTurn].getPiece() << " you win!";
 	}
 }

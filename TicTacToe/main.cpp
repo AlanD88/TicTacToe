@@ -24,6 +24,8 @@ int main()
 
 	intro();
 	processChoice(newGame);
+
+	newGame.takeTurn();
 	
 	system("pause");
 	return 0;
@@ -53,6 +55,7 @@ void processChoice(gameControls& newGame)
 	else
 	{
 		cerr << choice << " is an invalid selection" << endl;
+		
 	}
 
 	
