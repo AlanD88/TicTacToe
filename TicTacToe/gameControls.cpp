@@ -59,11 +59,15 @@ void gameControls::chooseSpot(int spot)
 		if (board[0] == "0")
 		{
 			board[0] = player[playerTurn].getPiece();
-
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
 			cerr << "Cannot move there.\n\n";
+			
 		}
 		break;
 
@@ -71,10 +75,15 @@ void gameControls::chooseSpot(int spot)
 		if (board[1] == "1")
 		{
 			board[1] = player[playerTurn].getPiece();
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
 			cerr << "Cannot move there.\n\n";
+			
 		}
 		break;
 
@@ -82,10 +91,15 @@ void gameControls::chooseSpot(int spot)
 		if (board[2] == "2")
 		{
 			board[2] = player[playerTurn].getPiece();
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
 			cerr << "Cannot move there.\n\n";
+			
 		}
 		break;
 
@@ -93,10 +107,15 @@ void gameControls::chooseSpot(int spot)
 		if (board[3] == "3")
 		{
 			board[3] = player[playerTurn].getPiece();
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
 			cerr << "Cannot move there.\n\n";
+			
 		}
 		break;
 
@@ -104,6 +123,10 @@ void gameControls::chooseSpot(int spot)
 		if (board[4] == "4")
 		{
 			board[4] = player[playerTurn].getPiece();
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
@@ -115,6 +138,10 @@ void gameControls::chooseSpot(int spot)
 		if (board[5] == "5")
 		{
 			board[5] = player[playerTurn].getPiece();
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
@@ -126,6 +153,10 @@ void gameControls::chooseSpot(int spot)
 		if (board[6] == "6")
 		{
 			board[6] = player[playerTurn].getPiece();
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
@@ -137,6 +168,10 @@ void gameControls::chooseSpot(int spot)
 		if (board[7] == "7")
 		{
 			board[7] = player[playerTurn].getPiece();
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
@@ -148,6 +183,10 @@ void gameControls::chooseSpot(int spot)
 		if (board[8] == "8")
 		{
 			board[8] = player[playerTurn].getPiece();
+			if (isWinner())
+				cout << player[playerTurn].getPiece() << " you win!";
+			else
+				nextTurn();
 		}
 		else
 		{
@@ -215,7 +254,6 @@ void gameControls::takeTurn()
 	
 	while (!isWinner())
 	{
-		nextTurn();
 		setBoard();
 		int choice;
 
@@ -232,14 +270,67 @@ void gameControls::takeTurn()
 		else //AI's turn
 		{
 			cout << player[playerTurn].getPiece() << " turn\n\n";
-			
-			
 
+				/*
+				0 | 1 | 2
+				---|---|---
+				3 | 4 | 5
+				---|---|---
+				6 | 7 | 8
+				*/
+				// check to see if other player will win to cut them off.
+					if (board[0] == board[1])
+					{
+						choice = 2;
+						chooseSpot(choice);
+					}
+					else if (board[0] == board[4])
+					{
+						choice = 8;
+						chooseSpot(choice);
+					}
+					else if (board[0] == board[3])
+					{
+						choice = 6;
+						chooseSpot(choice);
+					}
+					if (board[1] == board[2])
+					{
+						choice = 0;
+						chooseSpot(choice);
+					}
+					else if (board[1] == board[4])
+					{
+						choice = 7;
+						chooseSpot(choice);
+					}
+					else if (board[2] == board[4])
+					{
+						choice = 6;
+						chooseSpot(choice);
+					}
+					if (board[2] == board[5])
+					{
+						choice = 9;
+						chooseSpot(choice);
+					}
+					else if (board[3] == board[6])
+					{
+						choice = 7;
+						chooseSpot(choice);
+					}
+					else if (board[0] == board[3])
+					{
+						choice = 6;
+						chooseSpot(choice);
+					}
+					else
+					{
+						choice = rand() % 5;
+						chooseSpot(choice);
+					}
 		}
 
 	}
-	if (isWinner())
-	{
-		cout << player[playerTurn].getPiece() << " you win!";
-	}
+
 }
